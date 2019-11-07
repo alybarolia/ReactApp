@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'; 
+import { directive } from '@babel/types';
+import Entry from "./Entry";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+function App(){
+
+  const sayHello = () =>{
+    console.log("hello"); //change logic to print another module with score board
+  };
+
+
+
+  return(
+    <div>
+
+      <h1>Build Your Tournament Here!</h1>
+      <p></p>
+      <Entry />
+      <button onClick = {sayHello}>Start</button>
     </div>
   );
 }
