@@ -4,7 +4,7 @@ import Entry from "./Entry";
 
 function App(){
 
-  const sayHello = () =>{
+  const start = () =>{
     console.log("hello"); //change logic to print another module with score board
   };
 
@@ -16,7 +16,8 @@ function App(){
       <h1>Build Your Tournament Here!</h1>
       <p></p>
       <Entry />
-      <button onClick = {sayHello}>Start</button>
+      <p></p>
+      <button onClick = {start}>Start Tournament</button>
     </div>
   );
 }

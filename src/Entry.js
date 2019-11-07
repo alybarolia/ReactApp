@@ -7,10 +7,19 @@ return(
     <label>Tournament Name:</label>
     <input
     type = "text"
-    />
     
+    />
+
+    <p></p>
+    <label> # of players participating: </label>
+    <input 
+    type = "number"
+    />
+
+
 </div>
 );
+
 
 }
 
