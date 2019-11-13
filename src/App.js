@@ -1,23 +1,19 @@
-import React from 'react'; 
-import { directive } from '@babel/types';
-import Entry from "./Entry";
+import React from "react";
+import Entry from "./Setup";
+import Tournament from "./Tournament";
 
-function App(){
-
-  const start = () =>{
+function App() {
+  const start = () => {
     console.log("hello"); //change logic to print another module with score board
   };
 
-
-
-  return(
+  return (
     <div>
-
       <h1>Build Your Tournament Here!</h1>
       <p></p>
-      <Entry />
+      <Tournament />
       <p></p>
-      <button onClick = {start}>Start Tournament</button>
+      <button onClick={start}>Start Tournament</button>
     </div>
   );
 }
