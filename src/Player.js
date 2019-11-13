@@ -11,7 +11,7 @@ class Player extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div>Player Id: {this.props.playerId}</div>
+        <div>Player {this.props.playerId}</div>
         <input
           type="text"
           defaultValue={this.state.playerName}

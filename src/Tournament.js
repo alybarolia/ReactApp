@@ -12,13 +12,12 @@ class Tournament extends React.Component {
     };
     this.generatePlayer = this.generatePlayer.bind(this);
     this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
+    this.createBracket = this.createBracket.bind(this);
   }
 
   render() {
     return (
       <div>
-        <div>No of Players: {this.state.noOfPlayers}</div>
-        <div>TournamentName: {this.state.tournamentName}</div>
         <div>
           <Setup onGeneratePlayer={this.generatePlayer}></Setup>
         </div>
@@ -40,7 +39,7 @@ class Tournament extends React.Component {
   }
 
   handlePlayerNameChange(id, playerName) {
-    console.log(id + playerName);
+    console.log(playerName);
     let updatedPlayers = [];
     let oldPlayers = this.state.players;
     for (let i = 0; i < oldPlayers.length; i++) {
@@ -74,6 +73,10 @@ class Tournament extends React.Component {
       players.push({ id: i, name: "player" + i });
     }
     return players;
+  }
+
+  createBracket(event) {
+    console.log(this.state.players);
   }
 }
 export default Tournament;
