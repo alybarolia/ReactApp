@@ -5,9 +5,10 @@ class InitiateTournament extends Component {
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.props.onCreateBracket}>Start Tournament</button>
+        {!this.props.isTournamentStarted && (
+          <button onClick={this.props.onCreateBracket}>Start Tournament</button>
+        )}
         <button onClick={this.props.onResetTournament}>Reset Tournament</button>
-        ;
       </React.Fragment>
     );
   }

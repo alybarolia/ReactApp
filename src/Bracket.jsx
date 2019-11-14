@@ -3,7 +3,12 @@ import React, { Component } from "react";
 class Bracket extends Component {
   state = { players: this.props.players, roundPlayers: this.props.players };
   render() {
-    return <div>{this.createHeader()}</div>;
+    return (
+      <div>
+        <h4>{this.props.tournamentName}</h4>
+        {this.createHeader()}
+      </div>
+    );
   }
 
   createHeader() {
@@ -33,12 +38,10 @@ class Bracket extends Component {
   createRounds() {
     let rounds = Math.log(this.props.players.length) / Math.log(2) + 1; // plus 1 for winner
     let gamesRow = [];
-    let roundPlayers = this.state.roundPlayers;
+    let roundPlayers = this.props.players;
 
     for (let i = 1; i < rounds + 1; i++) {
       let roundGames = this.createRoundGames(roundPlayers);
-      console.log(roundGames);
-      console.log(roundPlayers);
       gamesRow.push(roundGames);
       roundPlayers = this.calculateNextRoundPlayers(roundPlayers);
     }
@@ -57,10 +60,11 @@ class Bracket extends Component {
     } else {
       for (let i = 0; i < players.length; i = i + 2) {
         roundPlayers.push(this.pickWinner(players[i], players[i + 1]));
-        console.log("winner:" + this.pickWinner(players[i], players[i + 1]));
+        console.log("winner:");
+        console.log(this.pickWinner(players[i], players[i + 1]));
       }
       //console.log(roundPlayers);
-      return { roundPlayers };
+      return roundPlayers;
     }
   }
 

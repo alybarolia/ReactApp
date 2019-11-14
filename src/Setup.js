@@ -28,7 +28,6 @@ class Setup extends React.Component {
         />
         <button onClick={this.generatePlayer}> Generate Players</button>
         {this.state.message}
-        <h4>{this.state.tournamentName}</h4>
       </div>
     );
   }

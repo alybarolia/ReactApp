@@ -25,15 +25,19 @@ class Tournament extends React.Component {
         <div>
           <Setup onGeneratePlayer={this.generatePlayer}></Setup>
         </div>
-        {this.renderPlayers()}
+        {!this.state.isTournamentStarted && this.renderPlayers()}
         {this.state.players.length !== 0 && (
           <InitiateTournament
+            isTournamentStarted={this.state.isTournamentStarted}
             onCreateBracket={this.createBracket}
             onResetTournament={this.resetTournament}
           />
         )}
         {this.state.isTournamentStarted && (
-          <Bracket players={this.state.players} />
+          <Bracket
+            tournamentName={this.state.tournamentName}
+            players={this.state.players}
+          />
         )}
       </div>
     );
