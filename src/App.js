@@ -10,15 +10,9 @@ class App extends Component {
         <h1>Build Your Tournament Here!</h1>
 
         <Tournament />
-        <p>
-          <button onClick={this.createBracket}>Start Tournament</button>
-        </p>
+        <p></p>
       </div>
     );
-  }
-
-  createBracket() {
-    console.log("hello");
   }
 }
 

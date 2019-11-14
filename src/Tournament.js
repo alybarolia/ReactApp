@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Setup from "./Setup";
 import Player from "./Player";
+import InitiateTournament from "./InitiateTounament";
+import Bracket from "./Bracket";
 
 class Tournament extends React.Component {
   constructor(props) {
@@ -8,11 +10,13 @@ class Tournament extends React.Component {
     this.state = {
       noOfPlayers: 0,
       tournamentName: "No Tournament",
-      players: []
+      players: [],
+      isTournamentStarted: false
     };
     this.generatePlayer = this.generatePlayer.bind(this);
     this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
     this.createBracket = this.createBracket.bind(this);
+    this.resetTournament = this.resetTournament.bind(this);
   }
 
   render() {
@@ -22,8 +26,26 @@ class Tournament extends React.Component {
           <Setup onGeneratePlayer={this.generatePlayer}></Setup>
         </div>
         {this.renderPlayers()}
+        {this.state.players.length !== 0 && (
+          <InitiateTournament
+            onCreateBracket={this.createBracket}
+            onResetTournament={this.resetTournament}
+          />
+        )}
+        {this.state.isTournamentStarted && (
+          <Bracket players={this.state.players} />
+        )}
       </div>
     );
+  }
+
+  resetTournament(event) {
+    this.setState({
+      noOfPlayers: 0,
+      tournamentName: "No Tournament",
+      players: [],
+      isTournamentStarted: false
+    });
   }
 
   renderPlayers() {
@@ -72,11 +94,39 @@ class Tournament extends React.Component {
     for (let i = 0; i < noOfPlayers; i++) {
       players.push({ id: i, name: "player" + i });
     }
+    console.log(players);
+    //let newPlayers = this.shuffle(players);
+    //console.log(newPlayers);
     return players;
   }
 
   createBracket(event) {
     console.log(this.state.players);
+    let randomizePlayers = this.shuffle(this.state.players);
+
+    for (let i = 0; i < randomizePlayers; i + 2) {
+      this.state.randomizePlayers.map(player => (
+        <label>
+          {player[i].playerName} faces {player[i + 1].playerName}
+        </label>
+      ));
+      //print new values of randomized array on screen
+    }
+    this.setState({ isTournamentStarted: true });
+  }
+
+  shuffle(array) {
+    let i = 0;
+    let j = 0;
+    let temp = 0;
+
+    for (i = array.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
   }
 }
 export default Tournament;

@@ -7,8 +7,7 @@ class Setup extends React.Component {
       playerValue: 0,
       tournamentName: "",
       tempPlayerValue: 0,
-      message: " Input should be a power of 2",
-      powerOf2: false
+      message: ""
     };
     this.generatePlayer = this.generatePlayer.bind(this);
     this.nameChanged = this.nameChanged.bind(this);
@@ -35,34 +34,19 @@ class Setup extends React.Component {
   }
 
   handleInput(event) {
-    this.setState({ message: "", powerOf2: true });
+    const playerChange = event.target.value;
 
-    let playerChange = event.target.value;
-
-    if (playerChange <= 1) {
-      this.setState({
-        message: event.target.value + " is not a power of 2",
-        powerOf2: false
-      });
-    }
-    while (playerChange > 1) {
-      if (playerChange % 2 !== 0) {
-        this.setState({
-          message: event.target.value + " is not a power of 2",
-          powerOf2: false
-        });
-      }
-      playerChange = playerChange / 2;
-    }
-    playerChange = event.target.value;
-
-    this.setState({ tempPlayerValue: event.target.value });
+    this.setState({ tempPlayerValue: playerChange });
   }
 
   generatePlayer(event) {
     //console.log(this);
     const playerChange = this.state.tempPlayerValue;
-    if (this.state.powerOf2) {
+    if (
+      this.state.tempPlayerValue > 1 &&
+      Number.isInteger(Math.log(this.state.tempPlayerValue) / Math.log(2))
+    ) {
+      this.setState({ message: "" });
       this.props.onGeneratePlayer(
         this.state.tempPlayerValue,
         this.state.tournamentName
