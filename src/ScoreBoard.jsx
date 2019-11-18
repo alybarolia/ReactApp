@@ -9,13 +9,14 @@ class ScoreBoard extends React.Component {
     //margin: "40px",
     border: "1px solid",
     //margin: "20px"
-    height: "15px"
+    height: "20px"
   };
 
   pStyle = {
     fontSize: "15px",
     //textAlign: "center",
-    display: "inline"
+    display: "inline",
+    width: "70px"
     //margin: "20px"
   };
 
@@ -30,15 +31,15 @@ class ScoreBoard extends React.Component {
     players: this.props.players,
     roundPlayers: this.props.players,
     roundNum: 0,
-    rounds: Math.log(this.props.players.length) / Math.log(2),
+    rounds: Math.log(this.props.players.length) / Math.log(2) + 1,
     formattedPlayers: []
   };
   render() {
     return (
-      <div>
+      <div key={Math.random()}>
         <h4>{this.props.tournamentName}</h4>
         {this.createHeader()}
-        {this.printNames(this.state.players)}
+        <div key={Math.random()}>{this.printNames(this.state.players)}</div>
       </div>
     );
   }
@@ -46,35 +47,69 @@ class ScoreBoard extends React.Component {
   createHeader() {
     let rounds = Math.log(this.props.players.length) / Math.log(2) + 1; // number of rounds required plus 1 for winner
     let headerRow = [];
+    let count = 0;
 
     for (let i = 1; i < rounds; i++) {
+      console.log("here" + i);
       headerRow.push(
-        <p key={i} style={this.pStyle}>
-          Round {i}
-        </p>
+        <div
+          key={Math.random()}
+          style={{
+            margin: "7" + "px",
+            fontSize: "15px",
+            display: "inline",
+            width: "70px",
+            textAlign: "center"
+          }}
+        >
+          Round {i + "    "}
+        </div>
       );
     }
+    console.log("final");
     headerRow.push(
-      <p key="700" style={this.pStyle}>
+      <div
+        key="700"
+        style={{
+          //marginLeft: "70" * { rounds } + "px",
+          fontSize: "15px",
+          display: "inline",
+          width: "70px",
+          textAlign: "center"
+        }}
+      >
         Winner!
-      </p>
+      </div>
     );
-    return <div style={this.headerFormat}>{headerRow}</div>;
+    return (
+      <div key={Math.random()} style={{ border: "1px solid" }}>
+        {headerRow}
+      </div>
+    );
   }
 
   printNames(players) {
     //let formattedPlayers = [];
     let winners = [];
-
+    let randomizePlayers = players;
     //could be roundnumber issue
-    let randomizePlayers = this.shuffle(players);
+    if (randomizePlayers.length === this.state.players) {
+      randomizePlayers = this.shuffle(players);
+    }
 
     if (randomizePlayers.length <= 1) {
       //console.log("here now");
       winners = randomizePlayers[0];
       this.state.formattedPlayers.push(
         //change height here for base height * round #
-        <div key="900" style={{ width: "60px", height: "20px" }}>
+        <div
+          key="900"
+          style={{
+            width: "70px",
+            marginLeft: "70" * this.state.roundNum + "px",
+            textAlign: "center"
+          }}
+        >
           {randomizePlayers[0].name}
         </div>
       );
@@ -84,23 +119,28 @@ class ScoreBoard extends React.Component {
       for (let i = 0; i < randomizePlayers.length; i = i + 2) {
         this.state.formattedPlayers.push(
           //change height here for base height * round #
-          <div key={i * 2}>
+          <div
+            key={Math.random()}
+            style={{ width: "70 px", display: "inline" }}
+          >
             <div
-              key={i}
+              key={Math.random()}
               style={{
-                width: "60px",
+                width: "70px",
                 height: "20px",
-                marginLeft: "20" * 2 * this.state.roundNum + "px"
+                marginLeft: "70" * this.state.roundNum + "px",
+                textAlign: "center"
               }}
             >
               {randomizePlayers[i].name}
             </div>
             <div
-              key={i + 1}
+              key={Math.random()}
               style={{
-                width: "60px",
+                width: "70px",
                 height: "20px",
-                marginLeft: "20" * 2 * this.state.roundNum + "px"
+                marginLeft: "70" * this.state.roundNum + "px",
+                textAlign: "center"
               }}
             >
               {randomizePlayers[i + 1].name}
