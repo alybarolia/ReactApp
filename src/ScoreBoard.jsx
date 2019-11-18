@@ -37,7 +37,7 @@ class ScoreBoard extends React.Component {
       <div>
         <h4>{this.props.tournamentName}</h4>
         {this.createHeader()}
-        {this.test()}
+        {this.printNames()}
       </div>
     );
   }
@@ -61,35 +61,52 @@ class ScoreBoard extends React.Component {
     return <div style={this.headerFormat}>{headerRow}</div>;
   }
 
-  test() {
-    //let rounds = Math.log(this.props.players.length) / Math.log(2) + 1; // number of rounds required plus 1 for winner
-    while (this.state.roundNum !== this.state.rounds) {
-      this.printNames();
-      this.state.roundNum = this.state.roundNum + 1; //----change to setstate after testing----
-    }
-  }
-
   printNames() {
-    let players = this.state.players;
-    let randomizePlayers = this.shuffle(players);
     let formattedPlayers = [];
     let winners = [];
-    // let rounds = Math.log(this.props.players.length) / Math.log(2) + 1; // number of rounds required plus 1 for winner
 
-    //console.log(randomizePlayers[3].name);
+    //could be roundnumber issue
+    let randomizePlayers = this.shuffle(this.state.players);
 
-    for (let i = 0; i < randomizePlayers.length; i = i + 2) {
+    if (randomizePlayers.length <= 1) {
+      //console.log("here now");
+      winners = randomizePlayers[0];
       formattedPlayers.push(
         //change height here for base height * round #
-        <div key={i * 2} style={this.matchupsFormat}>
-          <div key={i}>{randomizePlayers[i].name}</div>
-          <div key={i + 1}>{randomizePlayers[i + 1].name}</div>
+        <div key="900" style={{ width: "60px", height: "20px" }}>
+          {randomizePlayers[0].name}
         </div>
       );
-      winners = this.pickWinner(i, i + 1);
+    } else {
+      formattedPlayers = [];
+      winners = [];
+      for (let i = 0; i < randomizePlayers.length; i = i + 2) {
+        formattedPlayers.push(
+          //change height here for base height * round #
+          <div key={i * 2}>
+            <div key={i} style={{ width: "60px", height: "20px" }}>
+              {randomizePlayers[i].name}
+            </div>
+            <div key={i + 1} style={{ width: "60px", height: "20px" }}>
+              {randomizePlayers[i + 1].name}
+            </div>
+          </div>
+        );
+        let roundWinner = this.pickWinner(
+          randomizePlayers[i],
+          randomizePlayers[i + 1]
+        );
+
+        winners.push(roundWinner);
+        // holds the winners but not printing them out
+        console.log({ winners });
+        //console.log(randomizePlayers);
+        this.state.roundNum = this.state.roundNum + 1;
+        console.log(this.state.roundNum);
+      }
     }
-    console.log({ winners });
-    //this.state.players = randomizePlayers; //pick wiiner here
+
+    this.state.players = winners;
 
     return formattedPlayers;
   }

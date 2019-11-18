@@ -160,7 +160,7 @@ class Tournament extends React.Component {
    * @param {Event} event the action that triggeres the event.
    */
   createBracket(event) {
-    console.log(this.state.players);
+    //console.log(this.state.players);
     let randomizePlayers = this.shuffle(this.state.players);
 
     for (let i = 0; i < randomizePlayers; i + 2) {
