@@ -92,6 +92,7 @@ class ScoreBoard extends React.Component {
             </div>
           </div>
         );
+
         let roundWinner = this.pickWinner(
           randomizePlayers[i],
           randomizePlayers[i + 1]
@@ -99,6 +100,7 @@ class ScoreBoard extends React.Component {
 
         winners.push(roundWinner);
         // holds the winners but not printing them out
+        //create a function that passes winners and round number then prints it
         console.log({ winners });
         //console.log(randomizePlayers);
         this.state.roundNum = this.state.roundNum + 1;
