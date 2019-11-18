@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Setup from "./Setup";
 import Player from "./Player";
 import InitiateTournament from "./InitiateTounament";
-import Bracket from "./Bracket";
+import ScoreBoard from "./ScoreBoard";
 
 /**
  * This Class is responsible for creating the tournament with the number of players defined by the user and
@@ -48,7 +48,7 @@ class Tournament extends React.Component {
           />
         )}
         {this.state.isTournamentStarted && (
-          <Bracket
+          <ScoreBoard
             tournamentName={this.state.tournamentName}
             players={this.state.players}
           />

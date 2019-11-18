@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 /**
  * This Component is responsible for displaying the matchups between players in the form of a table.
  */
-class Bracket extends Component {
+class Bracket extends React.Component {
   state = { players: this.props.players, roundPlayers: this.props.players };
   render() {
     return (
@@ -14,6 +14,7 @@ class Bracket extends Component {
     );
   }
 
+  /*
   /**
    * This method is responsible for printing the header row for the amounts of rounds there are in the
    * tournament.
@@ -100,7 +101,7 @@ class Bracket extends Component {
     }
   }
 
-  /**
+  /*
    * This method is responsible for picking a winner when passed two players
    *
    * @param {Player} player1 First player in the matchup
