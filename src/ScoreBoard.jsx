@@ -27,22 +27,12 @@ class ScoreBoard extends React.Component {
     //marginLeft: "5px"
   };
 
-  displayFormat1 = {
-    //display: "inline",
-    width: "70px"
-  };
-  displayFormat2 = {
-    display: "inline-block",
-    width: "70px"
-  };
-
   state = {
     players: this.props.players,
     roundPlayers: this.props.players,
     roundNum: 0,
     rounds: Math.log(this.props.players.length) / Math.log(2) + 1,
-    formattedPlayers: [],
-    count: 0
+    formattedPlayers: []
   };
   render() {
     return (
@@ -60,6 +50,7 @@ class ScoreBoard extends React.Component {
     let count = 0;
 
     for (let i = 1; i < rounds; i++) {
+      console.log("here" + i);
       headerRow.push(
         <div
           key={Math.random()}
@@ -75,7 +66,7 @@ class ScoreBoard extends React.Component {
         </div>
       );
     }
-
+    console.log("final");
     headerRow.push(
       <div
         key="700"
@@ -101,47 +92,43 @@ class ScoreBoard extends React.Component {
     //let formattedPlayers = [];
     let winners = [];
     let randomizePlayers = players;
-    //let count = 0;
     //could be roundnumber issue
     if (randomizePlayers.length === this.state.players) {
       randomizePlayers = this.shuffle(players);
     }
 
     if (randomizePlayers.length <= 1) {
+      //console.log("here now");
       winners = randomizePlayers[0];
       this.state.formattedPlayers.push(
         //change height here for base height * round #
-        <div key="900" style={this.displayFormat2}>
+        <div
+          key="900"
+          style={{
+            width: "70px",
+            marginLeft: "70" * this.state.roundNum + "px",
+            textAlign: "center"
+          }}
+        >
           {randomizePlayers[0].name}
         </div>
       );
     } else {
       //this.state.formattedPlayers = [];
       //winners = [];
-
       for (let i = 0; i < randomizePlayers.length; i = i + 2) {
-        if (i >= randomizePlayers.length - 2) {
-          this.state.count = this.state.count + 1;
-          console.log("new count" + this.state.count);
-        }
-        console.log("round:" + this.state.roundNum);
-        //console.log(this.state.count);
         this.state.formattedPlayers.push(
           //change height here for base height * round #
           <div
             key={Math.random()}
-            style={
-              this.state.count === this.state.roundNum
-                ? this.displayFormat1
-                : this.displayFormat2
-            }
+            style={{ width: "70 px", display: "inline" }}
           >
             <div
               key={Math.random()}
               style={{
                 width: "70px",
-                //height: "20px",
-                //marginLeft: "70" * this.state.roundNum + "px",
+                height: "20px",
+                marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
             >
@@ -151,8 +138,8 @@ class ScoreBoard extends React.Component {
               key={Math.random()}
               style={{
                 width: "70px",
-                //height: "20px",
-                //marginLeft: "70" * this.state.roundNum + "px",
+                height: "20px",
+                marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
             >
@@ -167,8 +154,16 @@ class ScoreBoard extends React.Component {
         );
 
         winners.push(roundWinner);
+
+        // holds the winners but not printing them out
+        //create a function that passes winners and round number then prints it
+
+        //console.log(randomizePlayers);
       }
+      console.log(winners);
       this.state.roundNum = this.state.roundNum + 1;
+      //randomizePlayers = winners;
+      console.log(this.state.roundNum);
     }
     while (this.state.roundNum !== this.state.rounds) {
       this.printNames(winners);
