@@ -90,6 +90,7 @@ class ScoreBoard extends React.Component {
 
   printNames(players) {
     //let formattedPlayers = [];
+    let playerHolder = [];
     let winners = [];
     let randomizePlayers = players;
     //could be roundnumber issue
@@ -100,13 +101,13 @@ class ScoreBoard extends React.Component {
     if (randomizePlayers.length <= 1) {
       //console.log("here now");
       winners = randomizePlayers[0];
-      this.state.formattedPlayers.push(
+      playerHolder.push(
         //change height here for base height * round #
         <div
           key="900"
           style={{
             width: "70px",
-            marginLeft: "70" * this.state.roundNum + "px",
+            //marginLeft: "70" * this.state.roundNum + "px",
             textAlign: "center"
           }}
         >
@@ -117,18 +118,16 @@ class ScoreBoard extends React.Component {
       //this.state.formattedPlayers = [];
       //winners = [];
       for (let i = 0; i < randomizePlayers.length; i = i + 2) {
-        this.state.formattedPlayers.push(
+        playerHolder.push(
           //change height here for base height * round #
-          <div
-            key={Math.random()}
-            style={{ width: "70 px", display: "inline" }}
-          >
+          <div key={Math.random()}>
             <div
               key={Math.random()}
               style={{
                 width: "70px",
                 height: "20px",
-                marginLeft: "70" * this.state.roundNum + "px",
+                marginBottom: "20" * this.state.roundNum + "px",
+                //marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
             >
@@ -139,7 +138,8 @@ class ScoreBoard extends React.Component {
               style={{
                 width: "70px",
                 height: "20px",
-                marginLeft: "70" * this.state.roundNum + "px",
+                marginBottom: "20" * this.state.roundNum + "px",
+                //marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
             >
@@ -161,10 +161,22 @@ class ScoreBoard extends React.Component {
         //console.log(randomizePlayers);
       }
       console.log(winners);
-      this.state.roundNum = this.state.roundNum + 1;
+
       //randomizePlayers = winners;
-      console.log(this.state.roundNum);
     }
+    this.state.formattedPlayers.push(
+      <div
+        key={Math.random()}
+        style={{
+          display: "inline-block"
+          //marginBottom: "70" * this.state.roundNum + "px"
+        }}
+      >
+        {playerHolder}
+      </div>
+    );
+    this.state.roundNum = this.state.roundNum + 1;
+
     while (this.state.roundNum !== this.state.rounds) {
       this.printNames(winners);
     }
