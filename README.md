@@ -1,8 +1,8 @@
-Created by: Aly Khan Barolia
-Last Modified: November 14, 2019
-Version: 1.0
+### Created by: Aly Khan Barolia
+### Last Modified: November 14, 2019
+### Version: 1.0
 
-### Steps for execution:
+#### Steps for execution:
 - Download this repository as a .zip file onto your local computer
 - Extract its contents into a file location easily accessible
 - Open the project via Visual Studio or any similar IDE
