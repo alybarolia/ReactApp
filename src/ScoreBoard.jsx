@@ -1,32 +1,9 @@
 import React from "react";
 
 /**
- * This Component is responsible for displaying the matchups between players in the form of a table.
+ * This Component is responsible for displaying the matchups between players in the form of div tags.
  */
 class ScoreBoard extends React.Component {
-  headerFormat = {
-    //width: "20%",
-    //margin: "40px",
-    border: "1px solid",
-    //margin: "20px"
-    height: "20px"
-  };
-
-  pStyle = {
-    fontSize: "15px",
-    //textAlign: "center",
-    display: "inline",
-    width: "70px"
-    //margin: "20px"
-  };
-
-  matchupsFormat = {
-    height: "40px",
-    border: "1px solid"
-    //display: "inline-block"
-    //marginLeft: "5px"
-  };
-
   state = {
     players: this.props.players,
     roundPlayers: this.props.players,
@@ -34,6 +11,13 @@ class ScoreBoard extends React.Component {
     rounds: Math.log(this.props.players.length) / Math.log(2) + 1,
     formattedPlayers: []
   };
+
+  /**
+   * This method is responsible for calling the methods required for printing the matchuos bracket
+   *
+   * @param None
+   * @returns a DOM element of the bracket
+   */
   render() {
     return (
       <div key={Math.random()}>
@@ -44,6 +28,13 @@ class ScoreBoard extends React.Component {
     );
   }
 
+  /**
+   * This method is responsible for printing the header row for the amounts of rounds there are in the
+   * tournament.
+   *
+   * @param None
+   * @returns a DOM element that prints the rounds in the table
+   */
   createHeader() {
     let rounds = Math.log(this.props.players.length) / Math.log(2) + 1; // number of rounds required plus 1 for winner
     let headerRow = [];
@@ -88,6 +79,12 @@ class ScoreBoard extends React.Component {
     );
   }
 
+  /**
+   * This method is responsible for printing the matchups for the tournament in a bracket-like format.
+   *
+   * @param None
+   * @returns a DOM element that prints the matchups in the form of a bracket
+   */
   printNames(players) {
     //let formattedPlayers = [];
     let playerHolder = [];
@@ -102,15 +99,13 @@ class ScoreBoard extends React.Component {
       //console.log("here now");
       winners = randomizePlayers[0];
       playerHolder.push(
-        //change height here for base height * round #
         <div
           key="900"
           style={{
             width: "70px",
-            height: "20px",
             marginTop: "15" * this.state.roundNum + "px",
-
             //marginBottom: "20" * this.state.roundNum + "px",
+
             //marginLeft: "70" * this.state.roundNum + "px",
             textAlign: "center"
           }}
@@ -119,8 +114,6 @@ class ScoreBoard extends React.Component {
         </div>
       );
     } else {
-      //this.state.formattedPlayers = [];
-      //winners = [];
       for (let i = 0; i < randomizePlayers.length; i = i + 2) {
         playerHolder.push(
           //change height here for base height * round #
@@ -131,9 +124,7 @@ class ScoreBoard extends React.Component {
                 width: "70px",
                 height: "20px",
                 marginTop: "20" * this.state.roundNum + "px",
-                marginBottom: "20" * this.state.roundNum + "px",
-                //marginBottom: "20" * this.state.roundNum + "px",
-                //marginLeft: "70" * this.state.roundNum + "px",
+
                 textAlign: "center"
               }}
             >
@@ -168,8 +159,6 @@ class ScoreBoard extends React.Component {
         //console.log(randomizePlayers);
       }
       console.log(winners);
-
-      //randomizePlayers = winners;
     }
     this.state.formattedPlayers.push(
       <div
@@ -202,10 +191,23 @@ class ScoreBoard extends React.Component {
     return this.state.formattedPlayers;
   }
 
+  /**
+   * This method is responsible for picking a winner when passed two players
+   *
+   * @param {Player} player1 First player in the matchup
+   * @param {Player} player2 Second player in the matchup
+   * @returns a random player that won the matchup
+   */
   pickWinner(player1, player2) {
     return 0.5 - Math.random() < 0 ? player1 : player2;
   }
 
+  /**
+   * This method shuffles an array using the Fisher-Yates algorithm.
+   *
+   * @param {Array} array the array that is to be shuffled.
+   * @return {Array} array returns the shuffled array.
+   */
   shuffle(array) {
     let i = 0;
     let j = 0;
