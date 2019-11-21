@@ -107,6 +107,10 @@ class ScoreBoard extends React.Component {
           key="900"
           style={{
             width: "70px",
+            height: "20px",
+            marginTop: "15" * this.state.roundNum + "px",
+
+            //marginBottom: "20" * this.state.roundNum + "px",
             //marginLeft: "70" * this.state.roundNum + "px",
             textAlign: "center"
           }}
@@ -126,7 +130,9 @@ class ScoreBoard extends React.Component {
               style={{
                 width: "70px",
                 height: "20px",
+                marginTop: "20" * this.state.roundNum + "px",
                 marginBottom: "20" * this.state.roundNum + "px",
+                //marginBottom: "20" * this.state.roundNum + "px",
                 //marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
@@ -138,7 +144,8 @@ class ScoreBoard extends React.Component {
               style={{
                 width: "70px",
                 height: "20px",
-                marginBottom: "20" * this.state.roundNum + "px",
+                marginTop: "20" * this.state.roundNum + "px",
+                //marginBottom: "20" * this.state.roundNum + "px",
                 //marginLeft: "70" * this.state.roundNum + "px",
                 textAlign: "center"
               }}
@@ -168,7 +175,16 @@ class ScoreBoard extends React.Component {
       <div
         key={Math.random()}
         style={{
-          display: "inline-block"
+          display: "inline-block",
+          verticalAlign: "middle"
+          //paddingBottom: "20" * this.state.roundNum + "px"
+
+          //alignItems: "center"
+          //display: "block"
+          //marginLeft: "auto",
+          //marginRight: "auto"
+
+          //flex: 1
           //marginBottom: "70" * this.state.roundNum + "px"
         }}
       >
